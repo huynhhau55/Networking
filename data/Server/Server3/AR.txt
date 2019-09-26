@@ -1,0 +1,11 @@
+0.67 Cheese ==> Milk
+0.67 Milk ==> Cheese
+0.67 Chicken ==> Milk
+0.67 Milk ==> Chicken
+1.0 Chicken ==> Cheese
+1.0 Cheese ==> Chicken
+1.0 Bread ==> Milk
+0.67 Milk ==> Bread
+0.67 Chicken ==> "Milk Cheese"
+0.67 Cheese ==> "Milk Chicken"
+0.67 Milk ==> "Cheese Chicken"

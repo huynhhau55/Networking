@@ -1,0 +1,12 @@
+4
+Chicken
+Cheese
+Milk
+Bread
+4
+Milk Cheese
+Milk Chicken
+Cheese Chicken
+Milk Bread
+1
+Milk Cheese Chicken
