@@ -12,8 +12,10 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import Lib.FileInfo;
+import Lib.GenerateCheckSumSHA;
 import Lib.ListFile;
 
 public class Client2 {
@@ -97,7 +99,7 @@ public class Client2 {
 			e.printStackTrace();
 		}
 	}
-	static void reciveFile(int portNumber,DatagramSocket socket,InetAddress add) throws ClassNotFoundException, IOException {
+	static void reciveFile(int portNumber,DatagramSocket socket,InetAddress add) throws ClassNotFoundException, IOException, NoSuchAlgorithmException {
 		
 		int PIECES_OF_FILE_SIZE = 1024 * 30;
 		byte[] receiveData = new byte[PIECES_OF_FILE_SIZE];
@@ -125,7 +127,15 @@ public class Client2 {
 		     bos.write(receiveData, 0, fileInfo.getLastByteLength());
 		     bos.flush();
 		     bos.close();
-		     System.out.println("Done!");  
+		     System.out.println("Done!");
+		     String checkSumRecivedFile = GenerateCheckSumSHA.checkFile("D:\\Client2\\" + fileInfo.getFilename());
+		     if(checkSumRecivedFile.equalsIgnoreCase(fileInfo.getCheckSum())) {
+		    	 
+		    	 System.out.println("Not Corrupt File");
+		     }
+		     else {
+		    	 System.out.println("Corrpted File. Please Dowload File Again ! ");
+		     }
 
 	
 		} catch (IOException e) {

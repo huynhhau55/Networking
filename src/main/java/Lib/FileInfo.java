@@ -12,7 +12,14 @@ public class FileInfo implements Serializable {
     private int piecesOfFile;
     private int lastByteLength;
     private String status;
+    private String checkSum;
 	
+	public String getCheckSum() {
+		return checkSum;
+	}
+	public void setCheckSum(String checkSum) {
+		this.checkSum = checkSum;
+	}
 	public String getSourceDirectory() {
 		return sourceDirectory;
 	}

@@ -7,24 +7,27 @@ import java.net.Socket;
 
 public class MasterServer {
 	
-
-@SuppressWarnings("resource")
-public static void main(String[] args) throws Exception {
+	@SuppressWarnings("resource")
+	public static void main(String[] args) throws Exception {
 		
+		System.out.println("Master Server Running...");
 		InetAddress ip = InetAddress.getByName("172.16.1.2");
+		
 		try{
 			ServerSocket welcomeSocket = new ServerSocket(6789,10,ip);
 			while (true) {
         	
-				Socket socket = welcomeSocket.accept();
+				Socket socket = welcomeSocket.accept();	
 				new ServerThread(socket).start();
 			}
+		
 		}catch(IOException ex) {
 			
 			ex.printStackTrace();
 		}
-
-
 	}
+
+	
+
 
 }

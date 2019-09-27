@@ -31,10 +31,23 @@ public class ServerThread extends Thread {
 					
 				}else if(listFile.getId() == 0) {
 					
-					ObjectOutputStream oOut = new ObjectOutputStream(socket.getOutputStream());
-					ArrayList<ListFile> listFiles = new ArrayList<ListFile>();
 					File f = new File(fileName);
 					File[] LF = f.listFiles();
+					
+					try {
+						@SuppressWarnings("unused")
+						Socket check = new Socket("localhost",1111);
+						
+					}catch(IOException ioe) {
+						
+						LF[0].delete();
+					
+					}
+					
+					ObjectOutputStream oOut = new ObjectOutputStream(socket.getOutputStream());
+					ArrayList<ListFile> listFiles = new ArrayList<ListFile>();	
+					
+					LF = f.listFiles();
 					ObjectInputStream oIn = null;
 					for (int i = 0; i < LF.length; i++) {
 						

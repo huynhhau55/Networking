@@ -5,8 +5,11 @@ import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
 import Lib.ListFile;
 
 public class Server1 {
@@ -14,10 +17,16 @@ public class Server1 {
 	private static Socket Server1_Client;
 	private static int  MasterServerPort = 6789;
 	private static String filePath = ".\\data\\Server\\Server1\\";
+	
+	@SuppressWarnings({ "resource", "unused" })
 	public static void main(String[] args) throws Exception {
 		
 		sendFile();
 		sendFileUDP();
+		
+		ServerSocket live = new ServerSocket(1111);
+		Socket checkLive = live.accept();
+		
 				
 	}
 	static void sendFile() {

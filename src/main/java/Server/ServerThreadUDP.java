@@ -8,7 +8,10 @@ import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.security.NoSuchAlgorithmException;
+
 import Lib.FileInfo;
+import Lib.GenerateCheckSumSHA;
 
 public class ServerThreadUDP extends Thread {
 	
@@ -41,8 +44,6 @@ public class ServerThreadUDP extends Thread {
 				String b = fileSend.toString();
 				String c = a.trim();
 				String d = b.trim();
-				System.out.println(c);
-				System.out.println(d);
 				if(c.equalsIgnoreCase(d)) {
 					
 					InputStream input = new FileInputStream(fl[i].getAbsolutePath());
@@ -65,11 +66,13 @@ public class ServerThreadUDP extends Thread {
 			            sendData = new byte[PIECES_OF_FILE_SIZE];
 			        }
 			        
+			        String checkSum = GenerateCheckSumSHA.checkFile(fl[i].getAbsolutePath()) ;
 			        FileInfo fileInfo = new FileInfo();
 			        fileInfo.setFilename(fl[i].getName());
 			        fileInfo.setFileSize(fl[i].length());
 			        fileInfo.setPiecesOfFile(piecesOfFile);
 			        fileInfo.setLastByteLength(lastByteLength);
+			        fileInfo.setCheckSum(checkSum);
 			 
 			        
 			        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -97,6 +100,9 @@ public class ServerThreadUDP extends Thread {
 			
 		} catch (IOException e) {
 			
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

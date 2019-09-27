@@ -53,6 +53,7 @@ public class Server3 {
 		
 		while(true) {
 			
+			receiveData = new byte[1024];
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 			serverSocketUDP.receive(receivePacket);		
 			new ServerThreadUDP(serverSocketUDP,filePath,receivePacket).start();		
